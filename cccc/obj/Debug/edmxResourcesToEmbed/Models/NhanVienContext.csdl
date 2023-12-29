@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="KetQua">
+    <Key>
+      <PropertyRef Name="MaNV" />
+      <PropertyRef Name="TenSp" />
+    </Key>
+    <Property Name="MaNV" Type="Int32" Nullable="false" />
+    <Property Name="TenSp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DonGia" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="SoLuong" Type="Int32" />
+    <NavigationProperty Name="NhanVien" Relationship="Self.FK_KetQua_ToTable" FromRole="KetQua" ToRole="NhanVien" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="MaNV" />
+    </Key>
+    <Property Name="MaNV" Type="Int32" Nullable="false" />
+    <Property Name="HoTenNV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NamSinh" Type="Int16" />
+    <Property Name="GioiTinh" Type="Boolean" />
+    <NavigationProperty Name="KetQuas" Relationship="Self.FK_KetQua_ToTable" FromRole="NhanVien" ToRole="KetQua" />
+  </EntityType>
+  <Association Name="FK_KetQua_ToTable">
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+    <End Role="KetQua" Type="Self.KetQua" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="MaNV" />
+      </Principal>
+      <Dependent Role="KetQua">
+        <PropertyRef Name="MaNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DataContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="KetQuas" EntityType="Self.KetQua" />
+    <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+    <AssociationSet Name="FK_KetQua_ToTable" Association="Self.FK_KetQua_ToTable">
+      <End Role="NhanVien" EntitySet="NhanViens" />
+      <End Role="KetQua" EntitySet="KetQuas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

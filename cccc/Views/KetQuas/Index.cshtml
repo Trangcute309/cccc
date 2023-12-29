@@ -1,0 +1,81 @@
+﻿@model IEnumerable<cccc.Models.KetQua>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+    @Html.ActionLink("Thấp nhất", "Index1")
+</p>
+
+
+
+@{ Html.BeginForm("Index", "KetQuas", FormMethod.Get);}
+<label>Nhập:  </label>
+@Html.TextBox("search", "", new { placeholder = "nhập tên" })
+Tên nv
+@Html.DropDownList("MaNV", "ALL")
+<input type="submit" value="tìm kiếm" />
+
+@{ Html.EndForm();}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaNV)
+           
+           
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSp)
+        </th>
+        <th>
+         
+            @Html.ActionLink("đơn giá", "Index", new { sort = ViewBag.TTsort })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NhanVien.HoTenNV)
+        </th>
+        <th>
+            Thành tiên
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaNV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonGia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhanVien.HoTenNV)
+            </td>
+            <td>
+                @(item.SoLuong * item.DonGia)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MaNV, id2 = item.TenSp }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MaNV, id2 = item.TenSp }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MaNV, id2 = item.TenSp })
+            </td>
+        </tr>
+    }
+
+</table>

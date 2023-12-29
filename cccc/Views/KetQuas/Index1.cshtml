@@ -1,0 +1,61 @@
+﻿@model IEnumerable<cccc.Models.KetQua>
+@{
+    ViewBag.Title = "Index1";
+}
+
+<h2>Index1</h2>
+
+@if (ViewBag.ketQuaMin != null)
+{
+    var ketQuaMin = ViewBag.ketQuaMin as cccc.Models.KetQua;
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaNV)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenSp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DonGia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NhanVien.HoTenNV)
+            </th>
+            <th>
+                Thành tiên
+            </th>
+            <th></th>
+        </tr>
+        
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => ketQuaMin.MaNV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => ketQuaMin.TenSp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => ketQuaMin.DonGia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => ketQuaMin.SoLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => ketQuaMin.NhanVien.HoTenNV)
+                </td>
+                <td>
+                    @(ketQuaMin.SoLuong * ketQuaMin.DonGia)
+                </td>
+               
+            </tr>
+        
+
+    </table>
+
+}
